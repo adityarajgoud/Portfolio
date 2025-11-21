@@ -104,19 +104,23 @@ export const HeroSection = () => {
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="float-element w-full sm:w-auto border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto"
             >
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
-            </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="float-element w-full sm:w-auto border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 flex items-center"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </Button>
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>

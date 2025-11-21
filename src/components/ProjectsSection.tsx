@@ -40,10 +40,13 @@ export const ProjectsSection = () => {
     window.open(url, "_blank");
   };
 
+  const toggleMobileOverlay = (id: number) => {
+    setHoveredProject(hoveredProject === id ? null : id);
+  };
+
   return (
     <section id="projects" className="py-24 px-6 relative">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +64,6 @@ export const ProjectsSection = () => {
           <div className="w-24 h-1 bg-electric-blue mx-auto rounded-full mt-6" />
         </motion.div>
 
-        {/* Projects Grid */}
         <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div
@@ -72,9 +74,9 @@ export const ProjectsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               onHoverStart={() => setHoveredProject(project.id)}
               onHoverEnd={() => setHoveredProject(null)}
-              className="group relative bg-glass rounded-2xl overflow-hidden border border-border hover:border-electric-blue/50 transition-all duration-500 flex flex-col"
+              onClick={() => toggleMobileOverlay(project.id)}
+              className="group relative bg-glass rounded-2xl overflow-hidden border border-border hover:border-electric-blue/50 transition-all duration-500 flex flex-col cursor-pointer"
             >
-              {/* Image Container */}
               <div className="relative h-80 overflow-hidden">
                 <motion.img
                   src={project.image}
@@ -86,12 +88,10 @@ export const ProjectsSection = () => {
                   transition={{ duration: 0.8 }}
                 />
 
-                {/* Overlay */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
                 />
 
-                {/* Hover Actions */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={
@@ -102,20 +102,25 @@ export const ProjectsSection = () => {
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 flex items-center justify-center space-x-4"
                 >
-                  {/* Demo Button */}
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => handleLinkClick(project.links.demo)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick(project.links.demo);
+                    }}
                     className="bg-glass backdrop-blur-xl border border-electric-blue/50 text-electric-blue p-3 rounded-full hover:bg-electric-blue hover:text-background transition-all duration-300"
                   >
                     <Eye size={20} />
                   </motion.button>
-                  {/* GitHub Button */}
+
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => handleLinkClick(project.links.github)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick(project.links.github);
+                    }}
                     className="bg-glass backdrop-blur-xl border border-electric-blue/50 text-electric-blue p-3 rounded-full hover:bg-electric-blue hover:text-background transition-all duration-300"
                   >
                     <Github size={20} />
@@ -123,7 +128,6 @@ export const ProjectsSection = () => {
                 </motion.div>
               </div>
 
-              {/* Content */}
               <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-2xl font-heading font-bold text-foreground group-hover:text-electric-blue transition-colors duration-300">
@@ -140,7 +144,6 @@ export const ProjectsSection = () => {
                   {project.description}
                 </p>
 
-                {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, techIndex) => (
                     <motion.span
@@ -160,7 +163,6 @@ export const ProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Progress Indicator */}
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}

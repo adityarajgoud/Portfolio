@@ -285,10 +285,6 @@ export const SkillsSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-20 text-center"
         >
-          <h3 className="text-2xl font-heading font-semibold mb-8 text-foreground">
-            Technologies I Love Working With
-          </h3>
-
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "React",
@@ -307,24 +303,22 @@ export const SkillsSection = () => {
                   duration: 0.6,
                   delay: index * 0.1,
                   type: "spring",
-                  stiffness: 100,
+                  stiffness: 120,
                 }}
                 whileHover={{
                   scale: 1.15,
                   rotateY: 10,
-                  boxShadow: "0 10px 30px hsl(var(--electric-blue) / 0.5)",
                   y: -5,
+                  boxShadow: "0 10px 30px hsl(var(--electric-blue) / 0.5)",
+                  transition: { duration: 0.2 },
                 }}
                 className="relative px-6 py-3 bg-gradient-primary text-primary-foreground rounded-full text-sm font-medium shadow-lg hover:shadow-glow transition-all duration-300 cursor-pointer overflow-hidden group"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.5 }}
-                />
                 <span className="relative z-10">{tech}</span>
+
+                {/* Hover Glow Background */}
+                <span className="absolute inset-0 bg-gradient-to-r from-electric-blue/40 to-purple-500/40 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-200"></span>
               </motion.span>
             ))}
           </div>
